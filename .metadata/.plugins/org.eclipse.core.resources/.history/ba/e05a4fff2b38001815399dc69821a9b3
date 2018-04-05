@@ -1,0 +1,63 @@
+package ejercicio1;
+
+import java . awt . * ; import java . awt . event . * ;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import javax . swing . * ;
+public class ViewPanel extends JPanel implements WindowPanelWithExternalCtrl {
+	private JButton but;
+	private JLabel lab;
+	private JComboBox comb;
+	
+	public ViewPanel ( ) {
+		setLayout(new FlowLayout());
+		act = new JButton("Execute query");
+		comboBox.setEditable(true);
+		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
+		l = new JLabel("Prueba");
+		c = new JComboBox();
+		this.add(l) ;
+		add(act);
+		add(c);
+	}
+
+	public void controller(ActionListener ctr) {
+		act.addActionListener(ctr) ;
+		act.setActionCommand(EXECUTE);
+	}
+
+	public void changeText(String s) {
+		l.setText(s) ;
+	}
+	
+	public String formato1(){
+		Calendar calendardate = Calendar.getInstance();
+		String strdate = null ;
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy") ;
+		if (calendardate!= null) {
+			strdate = sdf.format(calendardate.getTime());
+		}
+		return strdate;
+	}
+	
+	public String formato2(){
+		Calendar calendardate = Calendar.getInstance();
+		String strdate = null ;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd") ;
+		if (calendardate!= null) {
+			strdate = sdf.format(calendardate.getTime());
+		}
+		return strdate;
+	}
+	
+	public String formato3(){
+		Calendar calendardate = Calendar.getInstance();
+		String strdate = null ;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy") ;
+		if (calendardate!= null) {
+			strdate = sdf . format(calendardate.getTime());
+		}
+		return strdate;
+	}
+}

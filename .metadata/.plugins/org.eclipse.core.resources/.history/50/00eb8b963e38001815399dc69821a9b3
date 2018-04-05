@@ -1,0 +1,32 @@
+package InterfazJL;
+
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.GroupLayout.Alignment;
+
+public class NorthPanel extends JPanel{
+
+	private JComboBox comboBox;
+	private JButton button;
+	
+	public NorthPanel(){
+		comboBox = new JComboBox();
+		comboBox.setEditable(true);
+		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
+		this.add(comboBox);
+		button = new JButton("Execute query");
+		button.setEnabled(true);
+		this.add(button);
+	}
+	
+	public JComboBox getComboBox(){
+		return comboBox;
+	}
+	
+	public JButton getButton(){
+		return button;
+	}
+
+}

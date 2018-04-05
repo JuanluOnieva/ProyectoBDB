@@ -1,0 +1,61 @@
+package InterfazJL;
+
+import java.awt.GridLayout;
+import java.util.Timer;
+
+import javax.swing.GroupLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.GroupLayout.Alignment;
+
+public class ViewMainPanel extends JPanel{
+
+	private JLabel title;
+	private JLabel state;
+	private NorthPanel npanel;
+	private GroupLayout g1_NorthPanel;
+	private CenterPanel cpanel;
+
+	
+	public ViewMainPanel(String SGDB, String status){
+		setLayout(new GridLayout(4, 1, 0, 0));
+		title = new JLabel(SGDB+" query executer");
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(title);
+		npanel = new NorthPanel(status);
+		
+		g1_NorthPanel = new GroupLayout(npanel);
+		g1_NorthPanel.setHorizontalGroup(
+			g1_NorthPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, g1_NorthPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(npanel.getComboBox(), 0, 358, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(npanel.getButton())
+					.addContainerGap())
+		);
+		g1_NorthPanel.setVerticalGroup(
+			g1_NorthPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(g1_NorthPanel.createSequentialGroup()
+					.addGap(12)
+					.addGroup(g1_NorthPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(npanel.getComboBox(), GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(npanel.getButton()))
+					.addContainerGap(12, Short.MAX_VALUE))
+		);
+		npanel.setLayout(g1_NorthPanel);
+		cpanel = new CenterPanel();
+		this.add(npanel);
+		this.add(cpanel);
+		state = new JLabel("Service status: " + status);
+		state.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(state);
+		time = new Timer();
+	}
+	
+	public String getTime(){
+		time.toString();
+	}
+	
+}

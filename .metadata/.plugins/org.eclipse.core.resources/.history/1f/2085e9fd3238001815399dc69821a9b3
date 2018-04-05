@@ -1,0 +1,86 @@
+package prueba;
+
+import java . awt . * ; import java . awt . event . * ;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax . swing . * ;
+import javax.swing.GroupLayout.Alignment;
+public class ViewPanel extends JPanel implements WindowPanelWithExternalCtrl {
+	private JButton but;
+	private JLabel lab;
+	private JComboBox comboBox;
+	private List<String> historial;
+	private FileWriter fich;
+	
+	public ViewPanel() throws IOException {
+		setLayout(new FlowLayout());
+		but = new JButton("Execute query");
+		but.setEnabled(true);
+		comboBox = new JComboBox();
+		comboBox.setEditable(true);
+		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
+		lab = new JLabel("Prueba");
+		comboBox = new JComboBox();
+		this.add(lab) ;
+		add(but);
+		add(comboBox);
+		historial = new LinkedList<String>();
+		fich = new FileWriter("historial.txt");
+		
+		GroupLayout gl_NorthPanel = new GroupLayout(getParent());
+		gl_NorthPanel.setHorizontalGroup(
+			gl_NorthPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_NorthPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(comboBox, 0, 358, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(but)
+					.addContainerGap())
+		);
+		gl_NorthPanel.setVerticalGroup(
+			gl_NorthPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_NorthPanel.createSequentialGroup()
+					.addGap(12)
+					.addGroup(gl_NorthPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(but))
+					.addContainerGap(12, Short.MAX_VALUE))
+		);
+		this.setLayout(gl_NorthPanel);
+		
+	}
+
+	public void controller(ActionListener ctr) {
+		but.addActionListener(ctr) ;
+		but.setActionCommand(EXECUTE);
+	}
+
+	public void changeText(String s) {
+		comboBox.addItem(s);
+		comboBox.setEditable(true);
+		comboBox.setSelectedItem(s);
+	}
+	
+	public void writeHistorial(String s){
+		try {
+			fich.write(s);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		historial.add(s);
+	}
+	
+	public JComboBox getCombox(){
+		return comboBox;
+	}
+	
+	public void setCombox(JComboBox b){
+		comboBox = b;
+	}
+}

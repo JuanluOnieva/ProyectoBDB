@@ -1,0 +1,74 @@
+package prueba;
+
+import java . awt . * ; import java . awt . event . * ;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax . swing . * ;
+public class ViewPanel extends JPanel implements WindowPanelWithExternalCtrl {
+	private JButton but;
+	private JLabel lab;
+	private JComboBox comboBox;
+	private List<String> historial;
+	private FileWriter fich;
+	
+	public ViewPanel() throws IOException {
+		setLayout(new FlowLayout());
+		but = new JButton("Execute query");
+		comboBox.setEditable(true);
+		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
+		lab = new JLabel("Prueba");
+		comboBox = new JComboBox();
+		this.add(lab) ;
+		add(but);
+		add(comboBox);
+		historial = new LinkedList<String>();
+		fich = new FileWriter("historial.txt");
+		
+	}
+
+	public void controller(ActionListener ctr) {
+		but.addActionListener(ctr) ;
+		but.setActionCommand(EXECUTE);
+	}
+
+	public void changeText(String s) {
+		lab.setText(s);
+	}
+	
+	
+	
+	public String formato1(){
+		Calendar calendardate = Calendar.getInstance();
+		String strdate = null ;
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy") ;
+		if (calendardate!= null) {
+			strdate = sdf.format(calendardate.getTime());
+		}
+		return strdate;
+	}
+	
+	public String formato2(){
+		Calendar calendardate = Calendar.getInstance();
+		String strdate = null ;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd") ;
+		if (calendardate!= null) {
+			strdate = sdf.format(calendardate.getTime());
+		}
+		return strdate;
+	}
+	
+	public String formato3(){
+		Calendar calendardate = Calendar.getInstance();
+		String strdate = null ;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy") ;
+		if (calendardate!= null) {
+			strdate = sdf . format(calendardate.getTime());
+		}
+		return strdate;
+	}
+}

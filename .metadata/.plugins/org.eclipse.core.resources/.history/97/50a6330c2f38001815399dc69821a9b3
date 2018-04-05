@@ -1,0 +1,62 @@
+package prueba;
+
+import java . awt . * ; import java . awt . event . * ;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax . swing . * ;
+public class ViewPanel extends JPanel implements WindowPanelWithExternalCtrl {
+	private JButton but;
+	private JLabel lab;
+	private JComboBox comboBox;
+	private List<String> historial;
+	private FileWriter fich;
+	
+	public ViewPanel() throws IOException {
+		setLayout(new FlowLayout());
+		but = new JButton("Execute query");
+		comboBox.setEditable(true);
+		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
+		lab = new JLabel("Prueba");
+		comboBox = new JComboBox();
+		this.add(lab) ;
+		add(but);
+		add(comboBox);
+		historial = new LinkedList<String>();
+		fich = new FileWriter("historial.txt");
+		
+	}
+
+	public void controller(ActionListener ctr) {
+		but.addActionListener(ctr) ;
+		but.setActionCommand(EXECUTE);
+	}
+
+	public void changeText(String s) {
+		comboBox.addItem(s);
+		comboBox.setEditable(true);
+		comboBox.setSelectedItem(s);
+	}
+	
+	public void writeHistorial(String s){
+		try {
+			fich.write(s);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		historial.add(s);
+	}
+	
+	public JComboBox getCombox(){
+		return comboBox;
+	}
+	
+	public JComboBox setCombox(JComboBox b){
+		comboBox = b;
+	}
+}

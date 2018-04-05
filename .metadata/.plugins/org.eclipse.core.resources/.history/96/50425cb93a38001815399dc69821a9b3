@@ -1,0 +1,26 @@
+package InterfazJL;
+
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+public class ViewMainPanel extends JPanel{
+
+	private JLabel title;
+	private JLabel state;
+	private NorthPanel npanel;
+	private CenterPanel cpanel;
+	
+	public ViewMainPanel(String SGDB, String status){
+		setLayout(new GridLayout(4, 1, 0, 0));
+		title = new JLabel(SGDB+" query executer");
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(title);
+		state = new JLabel("Service status: " + status);
+		state.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(state);
+	}
+	
+}

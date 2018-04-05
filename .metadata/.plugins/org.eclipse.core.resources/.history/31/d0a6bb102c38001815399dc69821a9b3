@@ -1,0 +1,9 @@
+package ejercicio1;
+import java . awt . event . ActionListener ;
+
+public interface WindowPanelWithExternalCtrl {
+	public static String EXECUTE = "Execute query" ;
+	public void controller(ActionListener ctr) ;
+	public void changeText(String s) ;
+}
+

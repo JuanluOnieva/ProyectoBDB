@@ -1,0 +1,25 @@
+package prueba;
+
+import java . awt . event.ActionEvent;
+import java . awt . event.ActionListener;
+import java.util.Calendar;
+
+import javax.swing.JComboBox;
+
+public class ExternalCtrl implements ActionListener {
+
+	WindowPanelWithExternalCtrl win ;
+
+	public ExternalCtrl(WindowPanelWithExternalCtrl w) {	
+		win = w ;
+	}
+	public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand ( );
+		String s = (String) win.getCombox().getSelectedItem();
+		
+		if (command == WindowPanelWithExternalCtrl.EXECUTE && s!=null){
+			win.changeText(s);
+			win.writeHistorial(s);
+		}
+	}
+}

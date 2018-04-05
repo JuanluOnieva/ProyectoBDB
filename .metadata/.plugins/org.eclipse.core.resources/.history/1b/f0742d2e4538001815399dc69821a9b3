@@ -1,0 +1,97 @@
+package InterfazJL;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+
+import prueba.ExternalCtrl;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+
+public class Main extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Main frame = new Main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Main() {
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 616, 420);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnOpt = new JMenu("File");
+		menuBar.add(mnOpt);
+		
+		JMenu mnAbout = new JMenu("About");
+		mnOpt.add(mnAbout);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new BorderLayout(0, 0));
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		contentPane.add(tabbedPane);
+		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED");
+		ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "DISCONNECTED");
+
+		tabbedPane.addTab("Mysql DB", null, mainPanel, null);
+		tabbedPane.addTab("MariaDB", null, mainPanel2, null);
+
+		ActionListener bt = new ExternalCtrl(mainPanel);
+		ActionListener bt2 = new ExternalCtrl(mainPanel2);
+		
+		
+		
+		
+		
+		
+		
+		this.pack();
+	}
+
+
+}

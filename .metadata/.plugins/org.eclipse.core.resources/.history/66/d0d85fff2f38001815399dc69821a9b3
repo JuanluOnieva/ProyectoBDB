@@ -1,0 +1,21 @@
+package prueba;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.event.ActionListener ;
+
+import javax.swing.JComboBox;
+import javax.swing.JFrame ;
+import javax.swing.JLabel;
+import javax.swing. JPanel ;
+public class ExternalCtrlDemo {
+	public static void main(String [ ] args) {
+		WindowPanelWithExternalCtrl winPanel = new ViewPanel();
+		ActionListener bt = new ExternalCtrl(winPanel) ;
+		winPanel.controller(bt) ;
+		JFrame mainWin = new JFrame("Actualizador de hora");
+		mainWin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ;
+		mainWin.setContentPane((JPanel)winPanel) ;
+		mainWin.pack();
+		mainWin.setVisible(true) ;
+	}
+}

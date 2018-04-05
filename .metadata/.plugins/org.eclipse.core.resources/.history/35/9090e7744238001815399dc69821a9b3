@@ -1,0 +1,20 @@
+package InterfazJL;
+import java . awt . event . ActionListener ;
+import java.util.List;
+
+import javax.swing.JComboBox;
+
+public interface WindowPanel{
+	public static String EXECUTE = "Execute query" ;
+	public void controller(ActionListener ctr) ;
+	public void changeText(String s) ;
+	public void writeHistorial(String s);
+	public JComboBox getCombox();
+	public void setCombox(JComboBox b);
+	public List<String> getHistorial();
+	public void cerrarFich();
+
+	
+	
+}
+

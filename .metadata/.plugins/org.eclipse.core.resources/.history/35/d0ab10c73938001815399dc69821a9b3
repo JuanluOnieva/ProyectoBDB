@@ -1,0 +1,24 @@
+package InterfazJL;
+
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+public class ViewMainPanel extends JPanel{
+
+	private JLabel lab;
+	private NorthPanel npanel;
+	private CenterPanel cpanel;
+	
+	
+	JPanel mainPanel = new JPanel();
+	tabbedPane.addTab("Mysql DB", null, mainPanel, null);
+	mainPanel.setLayout(new GridLayout(4, 1, 0, 0));
+	
+	JLabel titleLabel = new JLabel("Mysql query executer");
+	titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	mainPanel.add(titleLabel);
+	
+}

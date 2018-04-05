@@ -1,0 +1,6 @@
+package InterfazJL;
+
+public class CenterPanel extends JPanel{
+	
+
+}
