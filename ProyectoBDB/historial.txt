@@ -1,0 +1,4 @@
+SELECT * FROM exampleTable;
+prueba
+prueba2
+SELECT * FROM exampleTa

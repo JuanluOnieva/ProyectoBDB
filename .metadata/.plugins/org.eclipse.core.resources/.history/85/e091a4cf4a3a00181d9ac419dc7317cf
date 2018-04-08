@@ -1,0 +1,28 @@
+package InterfazJL;
+
+import java . awt . event.ActionEvent;
+import java . awt . event.ActionListener;
+import java.util.Calendar;
+
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+
+public class Control implements ActionListener {
+
+	ViewMainPanel win ;
+
+	public Control(ViewMainPanel w) {	
+		win = w ;
+	}
+	public void actionPerformed(ActionEvent e) {
+		String command = e.getActionCommand( );
+		String s = (String) win.getComboBox().getSelectedItem();
+		
+		if (command == "Execute query"){
+			if(s!=null && !win.getHistorial().contains(s)){
+				win.changeText(s);
+				win.writeHistorial(s);
+			}
+		}
+	}
+}

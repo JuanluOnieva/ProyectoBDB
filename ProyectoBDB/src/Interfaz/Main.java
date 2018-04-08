@@ -3,6 +3,9 @@ package Interfaz;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,10 +24,9 @@ import javax.swing.BoxLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Main extends JFrame {
 
@@ -33,7 +35,9 @@ public class Main extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txts;
+	private List<String> historial;
+	private List<ViewMainPanel> panel;
+	private archivo arch = new archivo("historial.txt");
 
 	/**
 	 * Launch the application.
@@ -48,13 +52,21 @@ public class Main extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
+		});	
 	}
 
 	/**
 	 * Create the frame.
 	 */
 	public Main() {
+		
+		if(arch.leer()==null)
+			historial = new LinkedList<String>();
+		else
+			historial = arch.leer();
+		
+		panel = new LinkedList<ViewMainPanel>();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 616, 420);
 		
@@ -73,93 +85,18 @@ public class Main extends JFrame {
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
+		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED", historial);
+		panel.add(mainPanel);
+		ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "DISCONNECTED", historial);
+		panel.add(mainPanel2);
 		
-		JPanel mainPanel = new JPanel();
 		tabbedPane.addTab("Mysql DB", null, mainPanel, null);
-		mainPanel.setLayout(new GridLayout(4, 1, 0, 0));
-		
-		JLabel titleLabel = new JLabel("Mysql query executer");
-		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		mainPanel.add(titleLabel);
-		
-		JPanel NorthPanel = new JPanel();
-		mainPanel.add(NorthPanel);
-		
-		JComboBox comboBox = new JComboBox();
-		
-		comboBox.setEditable(true);
-		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
-		
-		
-		
-		
-		JButton button = new JButton("Execute query");
-		button.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			}
-		});
-		button.setEnabled(true);
-		GroupLayout gl_NorthPanel = new GroupLayout(NorthPanel);
-		gl_NorthPanel.setHorizontalGroup(
-			gl_NorthPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_NorthPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(comboBox, 0, 358, Short.MAX_VALUE)
-					.addGap(18)
-					.addComponent(button)
-					.addContainerGap())
-		);
-		gl_NorthPanel.setVerticalGroup(
-			gl_NorthPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_NorthPanel.createSequentialGroup()
-					.addGap(12)
-					.addGroup(gl_NorthPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(button))
-					.addContainerGap(12, Short.MAX_VALUE))
-		);
-		NorthPanel.setLayout(gl_NorthPanel);
-		
-		JPanel centerPanel = new JPanel();
-		mainPanel.add(centerPanel);
-		centerPanel.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JTextPane txtpnQueryResult = new JTextPane();
-		txtpnQueryResult.setEditable(false);
-		txtpnQueryResult.setText("Query result");
-		centerPanel.add(txtpnQueryResult);
-		
-		JPanel centerRightPanel = new JPanel();
-		centerPanel.add(centerRightPanel);
-		centerRightPanel.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JPanel panel_1 = new JPanel();
-		centerRightPanel.add(panel_1);
-		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		JLabel lblQueryStats = new JLabel("Query stats");
-		lblQueryStats.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(lblQueryStats);
-		
-		JPanel panel_2 = new JPanel();
-		centerRightPanel.add(panel_2);
-		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
-		
-		JLabel lblExecutionTime = new JLabel("Execution time");
-		lblExecutionTime.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_2.add(lblExecutionTime);
-		
-		txts = new JTextField();
-		txts.setEditable(false);
-		txts.setHorizontalAlignment(SwingConstants.CENTER);
-		txts.setText("0.00s");
-		panel_2.add(txts);
-		txts.setColumns(10);
-		
-		JLabel lblServiceStatusDisconnected = new JLabel("Service status: CONNECTED");
-		lblServiceStatusDisconnected.setHorizontalAlignment(SwingConstants.CENTER);
-		mainPanel.add(lblServiceStatusDisconnected);
+		tabbedPane.addTab("MariaDB", null, mainPanel2, null);
+
+		ActionListener bt = new Control(mainPanel, panel, arch);
+		ActionListener bt2 = new Control(mainPanel2, panel, arch);
+		mainPanel.controller(bt);
+		mainPanel2.controller(bt2);
 		this.pack();
 	}
 
