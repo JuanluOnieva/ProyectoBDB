@@ -23,6 +23,8 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main extends JFrame {
 
@@ -92,6 +94,11 @@ public class Main extends JFrame {
 		
 		
 		JButton button = new JButton("Execute query");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		button.setEnabled(true);
 		GroupLayout gl_NorthPanel = new GroupLayout(NorthPanel);
 		gl_NorthPanel.setHorizontalGroup(

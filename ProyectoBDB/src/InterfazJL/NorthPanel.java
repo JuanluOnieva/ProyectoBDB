@@ -1,5 +1,7 @@
 package InterfazJL;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.GroupLayout;
@@ -7,11 +9,13 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout.Alignment;
+import dbDriver.*;
 
 public class NorthPanel extends JPanel{
 
 	private JComboBox comboBox;
 	private JButton button;
+	private DummySqlConnection dbTestConnection;
 	
 	public NorthPanel(String status, List<String> hist){
 		comboBox = new JComboBox();
@@ -20,8 +24,16 @@ public class NorthPanel extends JPanel{
 		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
 		this.add(comboBox);
 		button = new JButton("Execute query");
+		dbTestConnection = new DummySqlConnection("Test","Test","Test");
 		connected(status);
 		this.add(button);
+		
+		button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				dbTestConnection.executeQuery(comboBox.toString());
+			}
+		});
+		
 	}
 	
 	//si esta conectada deja hacer consultas

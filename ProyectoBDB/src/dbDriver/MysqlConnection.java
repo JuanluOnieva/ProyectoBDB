@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MysqlConnection {
+public class MysqlConnection implements DBDriverInterface{
 	String connectionString;
 	Connection conn = null;
 	
@@ -13,7 +13,7 @@ public class MysqlConnection {
 		mysqlConnect();
 	}
 	
-	Boolean mysqlConnect() {
+	public Boolean mysqlConnect() {
 		try {
 			conn = DriverManager.getConnection(connectionString);
 		} catch (SQLException ex) {
@@ -23,6 +23,12 @@ public class MysqlConnection {
 		    return false;
 		}
 		return true;
+	}
+
+	@Override
+	public String executeQuery(String query) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
