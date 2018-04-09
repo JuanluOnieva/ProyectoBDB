@@ -8,13 +8,15 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import dbDriver.DummySqlConnection;
+
 public class Control implements ActionListener {
 
 	ViewMainPanel win ;
 	List<ViewMainPanel> panel;
 	archivo arch;
 	
-	public Control(ViewMainPanel w, List<ViewMainPanel> p, archivo a) {	
+	public Control(ViewMainPanel w, List<ViewMainPanel> p, archivo a) {
 		win = w ;
 		panel =p;
 		arch = a;
@@ -32,7 +34,8 @@ public class Control implements ActionListener {
 					if(v!=win)
 						v.notify(s);
 			}
-			win.showResult(s);
+			win.showResult(win.getConn().executeQuery(s));
+			win.getCenterP().setSQLTime(win.getConn().getExTime());
 		}
 		
 	}

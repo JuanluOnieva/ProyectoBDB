@@ -1,5 +1,7 @@
 package dbDriver;
 
+import java.util.Random;
+
 public class DummySqlConnection implements DBDriverInterface {
 
 	public DummySqlConnection(String url, String user, String password) {
@@ -14,4 +16,8 @@ public class DummySqlConnection implements DBDriverInterface {
 		return "Test result";
 	}
 
+	public float getExTime() {
+		Random n = new Random();
+		return n.nextFloat();
+	}
 }

@@ -15,7 +15,6 @@ public class NorthPanel extends JPanel{
 
 	private JComboBox comboBox;
 	private JButton button;
-	private DummySqlConnection dbTestConnection;
 	
 	public NorthPanel(String status, List<String> hist){
 		comboBox = new JComboBox();
@@ -24,15 +23,11 @@ public class NorthPanel extends JPanel{
 		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
 		this.add(comboBox);
 		button = new JButton("Execute query");
-		dbTestConnection = new DummySqlConnection("Test","Test","Test");
+		
 		connected(status);
 		this.add(button);
 		
-		button.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				dbTestConnection.executeQuery(comboBox.toString());
-			}
-		});
+
 		
 	}
 	

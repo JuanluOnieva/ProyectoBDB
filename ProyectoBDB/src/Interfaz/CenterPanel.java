@@ -63,6 +63,9 @@ public class CenterPanel extends JPanel{
 		txtpnQueryResult.setText(result);
 	}
 	
+	public void setSQLTime(float t) {
+		txts.setText(""+t);
+	}
 
 
 }

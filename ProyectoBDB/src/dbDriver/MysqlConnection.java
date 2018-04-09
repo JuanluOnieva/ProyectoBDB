@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MysqlConnection implements DBDriverInterface{
+public class MysqlConnection extends DummySqlConnection{
 	String connectionString;
 	Connection conn = null;
 	
 	public MysqlConnection(String url, String user, String password) {
+		super(url, user, password);
 		connectionString="jdbc:" + url +"?" + "user=" + user + "&password=" + password;
 		mysqlConnect();
 	}

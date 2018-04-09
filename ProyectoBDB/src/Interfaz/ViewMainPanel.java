@@ -2,6 +2,8 @@ package Interfaz;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
@@ -10,6 +12,9 @@ import javax.swing.GroupLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import dbDriver.DummySqlConnection;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 
@@ -21,9 +26,10 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 	private GroupLayout g1_NorthPanel;
 	private CenterPanel cpanel;
 	public List<String> historial;
-
+	private DummySqlConnection dbCon;
 	
-	public ViewMainPanel(String SGDB, String status, List<String> hist){
+	public ViewMainPanel(String SGDB, String status, List<String> hist, DummySqlConnection sqlCon){
+		dbCon = sqlCon;
 		historial = hist;
 		setLayout(new GridLayout(4, 1, 0, 0));
 		title = new JLabel(SGDB+" query executer");
@@ -60,11 +66,19 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 	}
 
 
+
 	@Override
 	public void controller(ActionListener ctr) {
 		// TODO Auto-generated method stub
-		npanel.getButton().addActionListener(ctr) ;
+		npanel.getButton().addActionListener(ctr);
 		npanel.getButton().setActionCommand(EXECUTE);
+		
+		npanel.getButton().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				dbCon.executeQuery(getComboBox().toString());
+				
+			}
+		});
 	}
 
 
@@ -101,6 +115,14 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 	
 	public void notify(String s){
 		npanel.notify(s);
+	}
+	
+	public CenterPanel getCenterP() {
+		return cpanel;
+	}
+	
+	public DummySqlConnection getConn() {
+		return dbCon;
 	}
 	
 	

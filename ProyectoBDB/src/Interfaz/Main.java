@@ -2,43 +2,25 @@ package Interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+import dbDriver.DummySqlConnection;
 
 public class Main extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private List<String> historial;
 	private List<ViewMainPanel> panel;
 	private archivo arch = new archivo("historial.txt");
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -85,13 +67,18 @@ public class Main extends JFrame {
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane);
-		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED", historial);
+		
+		DummySqlConnection dbTestConnection = new DummySqlConnection("Test","Test","Test");
+		
+		ViewMainPanel mainPanel = new ViewMainPanel("MySQL", "CONNECTED", historial, dbTestConnection);
 		panel.add(mainPanel);
-		ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "DISCONNECTED", historial);
+		ViewMainPanel mainPanel2 = new ViewMainPanel("MariaDB", "DISCONNECTED", historial, null);
 		panel.add(mainPanel2);
 		
 		tabbedPane.addTab("Mysql DB", null, mainPanel, null);
+		
 		tabbedPane.addTab("MariaDB", null, mainPanel2, null);
+		
 
 		ActionListener bt = new Control(mainPanel, panel, arch);
 		ActionListener bt2 = new Control(mainPanel2, panel, arch);
