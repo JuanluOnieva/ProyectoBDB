@@ -18,10 +18,10 @@ public class CenterPanel extends JPanel{
 	private JLabel lblQueryStats;
 	private JLabel lblExecutionTime;
 	private JTextField txts;
-	private Time time;
+	//private Time time;
 	
 	public CenterPanel(){
-		time = new Time();
+		//time = new Time();
 		this.setLayout(new GridLayout(0, 2, 0, 0));
 		txtpnQueryResult = new JTextPane();
 		txtpnQueryResult.setEditable(false);
@@ -50,14 +50,14 @@ public class CenterPanel extends JPanel{
 		txts = new JTextField();
 		txts.setEditable(false);
 		txts.setHorizontalAlignment(SwingConstants.CENTER);
-		txts.setText(""+time.getSegundos());
+		//txts.setText(""+time.getSegundos());
 		panel_2.add(txts);
 		txts.setColumns(10);
 	}
 	
-	public String getTime(){
+	/*public String getTime(){
 		return time.toString();
-	}
+	}*/
 	
 	public void showResult(String result){
 		txtpnQueryResult.setText(result);
