@@ -1,23 +1,18 @@
 package Interfaz;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.GroupLayout.Alignment;
-import dbDriver.*;
 
 public class NorthPanel extends JPanel{
 
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JButton button;
 	
 	public NorthPanel(String status, List<String> hist){
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<>();
 		fillCombo(hist);
 		comboBox.setEditable(true);
 		comboBox.setSelectedItem("SELECT * FROM exampleTable;");
@@ -39,7 +34,7 @@ public class NorthPanel extends JPanel{
 			button.setEnabled(false);
 	}
 	
-	public JComboBox getComboBox(){
+	public JComboBox<String> getComboBox(){
 		return comboBox;
 	}
 	

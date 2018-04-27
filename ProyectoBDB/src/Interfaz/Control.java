@@ -26,6 +26,7 @@ public class Control implements ActionListener {
 		String s = (String) win.getComboBox().getSelectedItem();
 		
 		if (command == "Execute query"){
+			System.out.println("Executing control event");
 			if(s!=null && !win.getHistorial().contains(s)){
 				win.changeText(s);
 				win.writeHistorial(s);
@@ -34,6 +35,7 @@ public class Control implements ActionListener {
 					if(v!=win)
 						v.notify(s);
 			}
+			win.getConn().executeQuery(win.getComboBox().toString());
 			win.showResult(win.getConn().executeQuery(s));
 			win.getCenterP().setSQLTime(win.getConn().getExTime());
 		}

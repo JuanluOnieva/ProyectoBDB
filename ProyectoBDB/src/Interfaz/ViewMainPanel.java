@@ -70,15 +70,8 @@ public class ViewMainPanel extends JPanel implements WindowPanel{
 	@Override
 	public void controller(ActionListener ctr) {
 		// TODO Auto-generated method stub
-		npanel.getButton().addActionListener(ctr);
 		npanel.getButton().setActionCommand(EXECUTE);
-		
-		npanel.getButton().addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				dbCon.executeQuery(getComboBox().toString());
-				
-			}
-		});
+		npanel.getButton().addActionListener(ctr);
 	}
 
 
